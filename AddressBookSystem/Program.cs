@@ -35,6 +35,7 @@ namespace AddressBookSystem
 
                     case "4":
                         Console.WriteLine("\nQuitting....");
+                        dictionaryOP.WriteFile();
                         Environment.Exit(0);
                         break;
 

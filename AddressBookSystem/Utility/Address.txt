@@ -1,0 +1,3 @@
+Jay,Shankar,Karnataka,560059,1234567389,jay@gmail.com,12th cross,Bangalore
+Ravi,Kumar,Karnataka,560070,1234567899,ravi@gmail.com,2nd Phase,Bangalore
+Punit,Kumar,Karnataka,560070,3456789211,punit@gmail.com,3rd Phase,Bangalore
