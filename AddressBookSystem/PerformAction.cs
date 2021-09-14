@@ -77,8 +77,7 @@ namespace AddressBookSystem
 
                             case 3:
                                 Console.WriteLine("\nAddresses:");
-                                string msg = "First Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-                                operations.view((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                                operations.viewAll();
                                 break;
 
                             default:

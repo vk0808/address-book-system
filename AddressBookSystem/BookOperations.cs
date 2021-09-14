@@ -40,9 +40,28 @@ namespace AddressBookSystem
         }
 
         // method to view addresses in list
-        public void view(Action<Person> action)
+        private void view(List<Person> records)
         {
-            People.ForEach(action);
+            Console.Write($"\n{"firstname",10} |{"lastname",10} |{"phone",15} |{"email",25} |{"address",20} |{"city",15} |{"state",15} |{"zip-code",10} |\n");
+            Console.Write($"{new string('-', 134)} |\n");
+
+            foreach (Person addressData in records)
+            {
+                Console.Write($"{addressData.firstName,10} |");
+                Console.Write($"{addressData.lastName,10} |");
+                Console.Write($"{addressData.phoneNumber,15} |");
+                Console.Write($"{addressData.email,25} |");
+                Console.Write($"{addressData.address,20} |");
+                Console.Write($"{addressData.city,15} |");
+                Console.Write($"{addressData.state,15} |");
+                Console.Write($"{addressData.zip,10} |\n");
+            }
+            Console.Write($"{new string('-', 134)} |\n\n");
+        }
+
+        public void viewAll()
+        {
+            view(People);
         }
 
         // method to check if list is empty
@@ -77,10 +96,8 @@ namespace AddressBookSystem
             }
             else
             {
-                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                view(info);
             }
-
         }
 
         // method to view by State
@@ -93,8 +110,7 @@ namespace AddressBookSystem
             }
             else
             {
-                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                view(info);
             }
         }
 
@@ -125,15 +141,13 @@ namespace AddressBookSystem
             {
                 List<Person> info = People.FindAll(a => (a.city == name));
                 Console.WriteLine($"\nCount: {info.Count}");
-                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                view(info);
             }
             else if (type.ToLower() == "state")
             {
                 List<Person> info = People.FindAll(a => (a.state == name));
                 Console.WriteLine($"\nCount: {info.Count}");
-                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                view(info);
             }
             else
             {
@@ -168,9 +182,7 @@ namespace AddressBookSystem
                     Console.WriteLine("\nYou have entered wrong option");
                     break;
             }
-            
-            string msg = "First Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-            view((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+            view(People);
         }
     }
 }

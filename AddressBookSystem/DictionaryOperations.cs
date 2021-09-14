@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Text.Json;
+using System.Globalization;
+using CsvHelper;
 
 namespace AddressBookSystem
 {
@@ -10,11 +12,6 @@ namespace AddressBookSystem
     {
         List<Person> contacts;
         Dictionary<string, List<Person>> bookDictionary = new Dictionary<string, List<Person>>();
-
-        public DictionaryOperations()
-        {
-            ReadFromFile();
-        }
 
         public void AddAddressBook(string bookName)
         {
@@ -55,12 +52,12 @@ namespace AddressBookSystem
             }
             else
             {
-                Console.WriteLine("\nThis AddressBook already exists");
+                Console.WriteLine("\nNo AddressBook present");
             }
         }
 
         // Method to read from file
-        private void ReadFromFile()
+        public void ReadFromFile()
         {
             string filePath = @"../../../Utility/AddressBook.txt";
             try
@@ -120,6 +117,69 @@ namespace AddressBookSystem
             }
             Console.WriteLine("\nSuccessfully wrote to 'Address.txt'");
             writer.Close();
+        }
+
+        /// Method to write to csv file
+        public void WriteCSV()
+        {
+            string exportFilePath = @"../../../Utility/Export.csv";
+
+
+            using (var writer = new StreamWriter(exportFilePath))
+            using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                foreach (List<Person> addresses in bookDictionary.Values)
+                {
+                    foreach (Person person in addresses)
+                    {
+                        csvWriter.WriteField(person.firstName);
+                        csvWriter.WriteField(person.lastName);
+                        csvWriter.WriteField(person.phoneNumber);
+                        csvWriter.WriteField(person.email);
+                        csvWriter.WriteField(person.address);
+                        csvWriter.WriteField(person.city);
+                        csvWriter.WriteField(person.state);
+                        csvWriter.WriteField(person.zip);
+                        csvWriter.NextRecord();
+                    }
+                }
+            }
+            Console.WriteLine("\nSuccessfully wrote to Export.csv\n");
+        }
+
+
+        /// Method to read from csv file
+        public void ReadCSV()
+        {
+            string importFilePath = @"../../../Utility/Address.csv";
+
+            // config for no header
+            var config = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = false,
+            };
+
+            using (var reader = new StreamReader(importFilePath))
+            using (var csv = new CsvReader(reader, config))
+            {
+                IEnumerable<Person> records = csv.GetRecords<Person>();
+                Console.WriteLine("\nRead data successfully from Address.csv\n");
+                Console.Write($"\n{"firstname",10} |{"lastname",10} |{"phone",15} |{"email",25} |{"address",20} |{"city",15} |{"state",15} |{"zip-code",10} |\n");
+                Console.Write($"{new string('-', 134)} |\n");
+
+                foreach (Person addressData in records)
+                {
+                    Console.Write($"{addressData.firstName,10} |");
+                    Console.Write($"{addressData.lastName,10} |");
+                    Console.Write($"{addressData.phoneNumber,15} |");
+                    Console.Write($"{addressData.email,25} |");
+                    Console.Write($"{addressData.address,20} |");
+                    Console.Write($"{addressData.city,15} |");
+                    Console.Write($"{addressData.state,15} |");
+                    Console.Write($"{addressData.zip,10} |\n");
+                }
+                Console.Write($"{new string('-', 134)} |\n\n");
+            }
         }
     }
 }

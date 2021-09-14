@@ -14,12 +14,7 @@ namespace AddressBookSystem
             perform = new PerformAction(contactList);
         }
         
-        // method to display message
-        public void welcome()
-        {
-            Console.WriteLine("Welcome to Address Book Program\n");
-        }
-
+        
         // method to get user's choice
         public void Selection()
         {

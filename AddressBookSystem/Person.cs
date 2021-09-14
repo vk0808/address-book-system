@@ -15,7 +15,7 @@ namespace AddressBookSystem
         public string state;
         public string zip;
 
-        public Person(string firstNname, string lastName, string address, string city, string state, string zip, string phoneNumber, string email)
+        public Person(string firstNname, string lastName, string phoneNumber, string email, string address, string city, string state, string zip)
         {
             this.firstName = firstNname;
             this.lastName = lastName;

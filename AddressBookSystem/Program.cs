@@ -36,6 +36,7 @@ namespace AddressBookSystem
                     case "4":
                         Console.WriteLine("\nQuitting....");
                         dictionaryOP.WriteFile();
+                        dictionaryOP.WriteCSV();
                         Environment.Exit(0);
                         break;
 
@@ -48,6 +49,11 @@ namespace AddressBookSystem
 
         static void Main(string[] args)
         {
+            // display message
+            Console.WriteLine("Welcome to Address Book Program\n");
+
+            dictionaryOP.ReadFromFile();
+            dictionaryOP.ReadCSV();
             MainMenu();
         }
     }
