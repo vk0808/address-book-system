@@ -10,9 +10,9 @@ namespace AddressBookSystem
         PerformAction perform = new PerformAction();
 
         // method to display message
-        public string welcome()
+        public void welcome()
         {
-            return "Welcome to Address Book Program";
+            Console.WriteLine("Welcome to Address Book Program\n");
         }
 
         // method to get user's choice

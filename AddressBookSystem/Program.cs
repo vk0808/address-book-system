@@ -10,7 +10,7 @@ namespace AddressBookSystem
             AddressBook addressBook = new AddressBook();
 
             // display welcome message
-            Console.WriteLine(addressBook.welcome());
+            addressBook.welcome();
 
             // display menu and perform tasks based on choice
             addressBook.Selection();
