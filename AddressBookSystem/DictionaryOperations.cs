@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.Json;
 using System.Globalization;
 using CsvHelper;
+using Newtonsoft.Json;
 
 namespace AddressBookSystem
 {
@@ -147,7 +148,6 @@ namespace AddressBookSystem
             Console.WriteLine("\nSuccessfully wrote to Export.csv\n");
         }
 
-
         /// Method to read from csv file
         public void ReadCSV()
         {
@@ -168,6 +168,49 @@ namespace AddressBookSystem
                 Console.Write($"{new string('-', 134)} |\n");
 
                 foreach (Person addressData in records)
+                {
+                    Console.Write($"{addressData.firstName,10} |");
+                    Console.Write($"{addressData.lastName,10} |");
+                    Console.Write($"{addressData.phoneNumber,15} |");
+                    Console.Write($"{addressData.email,25} |");
+                    Console.Write($"{addressData.address,20} |");
+                    Console.Write($"{addressData.city,15} |");
+                    Console.Write($"{addressData.state,15} |");
+                    Console.Write($"{addressData.zip,10} |\n");
+                }
+                Console.Write($"{new string('-', 134)} |\n\n");
+            }
+        }
+
+        /// Method to write to json file
+        public void WriteJSON()
+        {
+            string exportFilePath = @"../../../Utility/Address.json";
+            Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
+            using (StreamWriter sw = new StreamWriter(exportFilePath))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, bookDictionary);
+            }
+            Console.WriteLine("\nSuccessfully wrote to Export.json");
+        }
+
+
+        /// Method to read from json file
+        public void ReadJSON()
+        {
+            string importFilePath = @"../../../Utility/Address.json";
+
+            Console.WriteLine("\nSuccessfully read from Address.json");
+
+            Dictionary<string, List<Person>> records = JsonConvert.DeserializeObject<Dictionary<string, List<Person>>>(File.ReadAllText(importFilePath));
+            Console.WriteLine("\nRead data successfully from Address.json");
+            Console.Write($"\n{"firstname",10} |{"lastname",10} |{"phone",15} |{"email",25} |{"address",20} |{"city",15} |{"state",15} |{"zip-code",10} |\n");
+            Console.Write($"{new string('-', 134)} |\n");
+
+            foreach (List<Person> addresses in records.Values)
+            {
+                foreach (Person addressData in addresses)
                 {
                     Console.Write($"{addressData.firstName,10} |");
                     Console.Write($"{addressData.lastName,10} |");

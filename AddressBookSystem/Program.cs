@@ -37,6 +37,8 @@ namespace AddressBookSystem
                         Console.WriteLine("\nQuitting....");
                         dictionaryOP.WriteFile();
                         dictionaryOP.WriteCSV();
+                        dictionaryOP.WriteJSON();
+
                         Environment.Exit(0);
                         break;
 
@@ -54,6 +56,8 @@ namespace AddressBookSystem
 
             dictionaryOP.ReadFromFile();
             dictionaryOP.ReadCSV();
+            dictionaryOP.ReadJSON();
+
             MainMenu();
         }
     }
