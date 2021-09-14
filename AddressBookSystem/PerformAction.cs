@@ -7,7 +7,12 @@ namespace AddressBookSystem
     class PerformAction
     {
         // object instantiation
-        BookOperations operations = new BookOperations();
+        BookOperations operations;
+
+        public PerformAction(List<Person> contactList)
+        {
+            operations = new BookOperations(contactList);
+        }
 
         // method to perform action based on choice
         public void actions(string selection)

@@ -6,13 +6,12 @@ namespace AddressBookSystem
 {
     class BookOperations
     {
-
         List<Person> People;
 
         // constructor
-        public BookOperations()
+        public BookOperations(List<Person> contactList)
         {
-            People = new List<Person>();
+            People = contactList;
         }
 
         // methpd to add an address to list

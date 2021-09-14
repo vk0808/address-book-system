@@ -7,8 +7,13 @@ namespace AddressBookSystem
     public class AddressBook
     {
         // object instantiation
-        PerformAction perform = new PerformAction();
+        PerformAction perform;
 
+        public AddressBook(List<Person> contactList)
+        {
+            perform = new PerformAction(contactList);
+        }
+        
         // method to display message
         public void welcome()
         {
@@ -19,7 +24,6 @@ namespace AddressBookSystem
         public void Selection()
         {
             string choice = "";
-            displayMenu();
             while (!choice.ToUpper().Equals("Q"))
             {
                 Console.WriteLine("\nSelection: ");
