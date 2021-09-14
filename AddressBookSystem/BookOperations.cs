@@ -116,5 +116,28 @@ namespace AddressBookSystem
                 }
             }
         }
+
+        /// Method to view all addresses by city or state
+        public void viewByCityState(string type, string name)
+        {
+            if (type.ToLower() == "city")
+            {
+                List<Person> info = People.FindAll(a => (a.city == name));
+                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
+                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+            }
+            else if (type.ToLower() == "state")
+            {
+                List<Person> info = People.FindAll(a => (a.state == name));
+                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
+                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+            }
+            else
+            {
+                Console.WriteLine("\nPerson not found");
+            }
+        }
+
+
     }
 }

@@ -56,9 +56,36 @@ namespace AddressBookSystem
                     }
                     else
                     {
-                        Console.WriteLine("\nAddresses:");
-                        string msg = "First Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
-                        operations.view((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                        Console.Write("\nView by\n1. City\n2. State\n3. All\nEnter your option: ");
+                        switch (int.Parse(Console.ReadLine()))
+                        {
+                            case 1:
+                                Console.Write("\nEnter the name of city: ");
+                                string cityName = Console.ReadLine();
+                                Console.WriteLine("\nAddresses:");
+
+                                operations.viewByCityState("city", cityName);
+                                break;
+
+                            case 2:
+                                Console.Write("\nEnter the name of state: ");
+                                string stateName = Console.ReadLine();
+                                Console.WriteLine("\nAddresses:");
+
+                                operations.viewByCityState("state", stateName);
+                                break;
+
+                            case 3:
+                                Console.WriteLine("\nAddresses:");
+
+                                string msg = "First Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
+                                operations.view((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+                                break;
+
+                            default:
+                                Console.WriteLine("\nInvalid option");
+                                return;
+                        }
                     }
                     break;
 
