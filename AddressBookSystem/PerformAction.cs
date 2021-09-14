@@ -196,6 +196,11 @@ namespace AddressBookSystem
                     }
                     break;
 
+                // Sort the list by city
+                case "O":
+                    operations.SortList();
+                    break;
+
                 // quit
                 case "Q":
                     Console.WriteLine("\nQuitting....");

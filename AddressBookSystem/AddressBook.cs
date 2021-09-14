@@ -44,6 +44,7 @@ namespace AddressBookSystem
             Console.WriteLine("E - Edit an Address");
             Console.WriteLine("S - Search an Address");
             Console.WriteLine("L - List All Addresses");
+            Console.WriteLine("O - Sort Addresses");
             Console.WriteLine("D - Delete an Address");
             Console.WriteLine("Q - Quit");
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace AddressBookSystem
 {
@@ -140,6 +141,12 @@ namespace AddressBookSystem
             }
         }
 
-
+        // Method to sort list by person name
+        public void SortList()
+        {
+            People = People.OrderBy(person => person.firstName).ToList();
+            string msg = "First Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
+            view((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+        }
     }
 }
