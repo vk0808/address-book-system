@@ -19,7 +19,7 @@ namespace AddressBookSystem
         public bool add(string firstName, string lastName, string phoneNumber, string email, string address, string city, string state, string zip)
         {
             Person person = new Person(firstName, lastName, phoneNumber, email, address, city, state, zip);
-            Person result = find(firstName);
+            Person result = find(firstName, lastName);
 
             if (result == null)
             {
@@ -33,9 +33,9 @@ namespace AddressBookSystem
         }
 
         // method to find an address from list
-        public Person find(string name)
+        public Person find(string firstName, string lastName)
         {
-            Person info = People.Find((a) => a.firstName == name);
+            Person info = People.Find((a) => (a.firstName == firstName && a.lastName == lastName));
             return info;
         }
 
@@ -52,9 +52,9 @@ namespace AddressBookSystem
         }
 
         // method to delete an address
-        public bool delete(string name)
+        public bool delete(string firstName, string lastName)
         {
-            Person person = find(name);
+            Person person = find(firstName, lastName);
 
             if (person != null)
             {
