@@ -141,10 +141,34 @@ namespace AddressBookSystem
             }
         }
 
-        // Method to sort list by person name
+        // Method to sort list by person name/city/state/zip
         public void SortList()
         {
-            People = People.OrderBy(person => person.firstName).ToList();
+            Console.WriteLine("\nSort by: \n1. Name\n2. City\n3. State\n4.ZIP Code");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    People = People.OrderBy(person => person.firstName).ToList();
+                    break;
+
+                case "2":
+                    People = People.OrderBy(person => person.city).ToList();
+                    break;
+
+                case "3":
+                    People = People.OrderBy(person => person.state).ToList();
+                    break;
+
+                case "4":
+                    People = People.OrderBy(person => person.zip).ToList();
+                    break;
+
+                default:
+                    Console.WriteLine("\nYou have entered wrong option");
+                    break;
+            }
+            
             string msg = "First Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
             view((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
         }
