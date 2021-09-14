@@ -127,6 +127,32 @@ namespace AddressBookSystem
                     }
                     break;
 
+                // Search by city or state
+                case "S":
+                    string personName;
+                    Console.Write("\nSearch by\n1. City\n2. State\nEnter your option: ");
+                    switch (int.Parse(Console.ReadLine()))
+                    {
+                        case 1:
+                            Console.Write("\nEnter the name of city: ");
+                            string cityName = Console.ReadLine();
+                            Console.Write("\nEnter the name of person: ");
+                            personName = Console.ReadLine();
+                            operations.SearchByCityState("city", cityName, personName);
+                            break;
+                        case 2:
+                            Console.Write("\nEnter the name of state: ");
+                            string stateName = Console.ReadLine();
+                            Console.Write("\nEnter the name of person: ");
+                            personName = Console.ReadLine();
+                            operations.SearchByCityState("state", stateName, personName);
+                            break;
+                        default:
+                            Console.WriteLine("\nInvalid option");
+                            return;
+                    }
+                    break;
+
                 // delete an address
                 case "D":
                     Console.WriteLine("\nEnter First Name to Delete: ");

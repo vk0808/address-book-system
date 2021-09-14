@@ -65,5 +65,56 @@ namespace AddressBookSystem
                 return false;
             }
         }
+
+        // method to view by City
+        public void viewByCity(string personName, string name)
+        {
+            List<Person> info = People.FindAll(a => (a.firstName == personName && a.city == name));
+            if (info.Count == 0)
+            {
+                Console.WriteLine("\nPerson not found");
+            }
+            else
+            {
+                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
+                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+            }
+
+        }
+
+        // method to view by State
+        public void viewByState(string personName, string name)
+        {
+            List<Person> info = People.FindAll(a => (a.firstName == personName && a.state == name));
+            if (info.Count == 0)
+            {
+                Console.WriteLine("\nPerson not found");
+            }
+            else
+            {
+                string msg = "\nFirst Name: {0}\nLast Name: {1}\nPhone Number: {2}\nEmail Id: {3}\nAddress: {4}\nCity: {5}\nState: {6}\nZIP Code: {7}\n";
+                info.ForEach((item) => Console.WriteLine(msg, item.firstName, item.lastName, item.phoneNumber, item.email, item.address, item.city, item.state, item.zip));
+            }
+        }
+
+        // Method to search
+        public void SearchByCityState(string type, string name, string personName)
+        {
+            if (isEmpty())
+            {
+                Console.WriteLine("\nAdress book is empty");
+            }
+            else
+            {
+                if (type.ToLower() == "city")
+                {
+                    viewByCity(personName, name);
+                }
+                else if (type.ToLower() == "state")
+                {
+                    viewByState(personName, name);
+                }
+            }
+        }
     }
 }
