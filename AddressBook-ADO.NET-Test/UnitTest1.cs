@@ -36,5 +36,27 @@ namespace AddressBook_ADO.NET_Test
             var countPerson = book.FindCount();
             Assert.IsTrue(countPerson);
         }
+
+        [TestMethod]
+        public void GivenPersonDetails_ShouldAddNewRecord()
+        {
+            Book book = new Book();
+            PersonModel person = new PersonModel()
+            {
+                FirstName = "Madana",
+                LastName = "Mohana",
+                Address = "13th cross",
+                City = "Hyderabad",
+                State = "Andhra Pradesh",
+                Zip = "522403",
+                PhoneNumber = "1234567890",
+                Email = "mohan@gmail.com",
+                BookName = "book3",
+                BookType = "Profession",
+            };
+
+            var personName = book.AddNewRecord(person);
+            Assert.IsTrue(personName);
+        }
     }
 }

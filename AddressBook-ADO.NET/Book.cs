@@ -152,5 +152,48 @@ namespace AddressBook_ADO.NET
             }
             return false;
         }
+
+        // method to add new record to table
+        public bool AddNewRecord(PersonModel model)
+        {
+            BookConnection = ConnectionSetup();
+
+            try
+            {
+                using (BookConnection)
+                {
+                    SqlCommand command = new SqlCommand("SpAddPersonDetails", BookConnection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FirstName", model.FirstName);
+                    command.Parameters.AddWithValue("@LastName", model.LastName);
+                    command.Parameters.AddWithValue("@Address", model.Address);
+                    command.Parameters.AddWithValue("@City", model.City);
+                    command.Parameters.AddWithValue("@State", model.State);
+                    command.Parameters.AddWithValue("@Zip", model.Zip);
+                    command.Parameters.AddWithValue("@PhoneNumber", model.PhoneNumber);
+                    command.Parameters.AddWithValue("@Email", model.Email);
+                    command.Parameters.AddWithValue("@BookName", model.BookName);
+                    command.Parameters.AddWithValue("@BookType", model.BookType);
+
+                    BookConnection.Open();
+                    var result = command.ExecuteNonQuery();
+                    BookConnection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                BookConnection.Close();
+            }
+            return false;
+        }
     }
 }
