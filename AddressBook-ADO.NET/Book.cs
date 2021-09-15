@@ -68,5 +68,46 @@ namespace AddressBook_ADO.NET
             }
             return cityState;
         }
+
+        // method to retrieve person by specific date period
+        public bool RetrievePerson_BetweenParticularDate()
+        {
+            BookConnection = ConnectionSetup();
+            try
+            {
+                PersonModel displayModel = new PersonModel();
+
+                using (BookConnection)
+                {
+                    SqlCommand command = new SqlCommand("SELECT FirstName, LastName FROM address WHERE AddedDate BETWEEN '2019-07-12' and GETDATE();", BookConnection);
+
+                    BookConnection.Open();
+                    SqlDataReader dr = command.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            displayModel.FirstName = dr.GetString(0);
+                            displayModel.LastName = dr.GetString(1);
+                            Console.WriteLine(displayModel.FirstName + " " + displayModel.LastName);
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No data found.");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                BookConnection.Close();
+            }
+            return false;
+        }
     }
 }

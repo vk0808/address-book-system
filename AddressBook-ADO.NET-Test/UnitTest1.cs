@@ -20,5 +20,13 @@ namespace AddressBook_ADO.NET_Test
             string cityState = book.UpdatePersonCityState(updateModel)[0];
             Assert.AreEqual(updateModel.City, cityState);
         }
+
+        [TestMethod]
+        public void GivenDateRange_ShouldReturnPersonName()
+        {
+            Book book = new Book();
+            var personName = book.RetrievePerson_BetweenParticularDate();
+            Assert.IsTrue(personName);
+        }
     }
 }
