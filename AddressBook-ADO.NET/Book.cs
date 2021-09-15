@@ -109,5 +109,48 @@ namespace AddressBook_ADO.NET
             }
             return false;
         }
+
+        // method to find count of records fron db
+        public bool FindCount()
+        {
+            BookConnection = ConnectionSetup();
+            try
+            {
+                string cityState = "Bangalore";
+                PersonModel displayModel = new PersonModel();
+
+                using (BookConnection)
+                {
+                    SqlCommand command = new SqlCommand($"SELECT COUNT(FirstName) AS CityStateCount FROM address WHERE CITY = '{cityState}';", BookConnection);
+                    int countPerson = 0;
+
+                    BookConnection.Open();
+                    SqlDataReader dr = command.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            countPerson = dr.GetInt32(0);
+                            Console.WriteLine(cityState + ": " + countPerson);
+
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No data found.");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                BookConnection.Close();
+            }
+            return false;
+        }
     }
 }
