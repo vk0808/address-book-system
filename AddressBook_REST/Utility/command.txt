@@ -1,0 +1,3 @@
+json-server --watch Address.json
+
+json-server --port 4000 --routes routes.json --watch Address.json
